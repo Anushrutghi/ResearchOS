@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>ResearchOS — Research workspace</title>
+  <link rel="stylesheet" href="/assets/app.css">
+  <link rel="stylesheet" href="/assets/app-extra.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-row"><div class="brand-mark">R</div><div><strong>ResearchOS</strong><small>Research workspace</small></div><button class="icon-button sidebar-toggle" aria-label="Collapse sidebar">‹</button></div>
+      <button class="new-chat" id="newChat"><span>＋</span> New chat</button>
+      <nav class="primary-nav">
+        <button class="nav-item selected" data-view="chat"><span>◷</span> Chat</button>
+        <button class="nav-item" data-view="projects"><span>▦</span> Projects</button>
+        <button class="nav-item" data-view="library"><span>▤</span> Research library</button>
+        <button class="nav-item" data-view="evidence"><span>◇</span> Evidence map</button>
+        <button class="nav-item" data-view="methodology"><span>⌘</span> Methodology</button>
+        <button class="nav-item" data-view="agents"><span>◈</span> Agents & workflows</button>
+        <button class="nav-item" data-view="experiments"><span>⚗</span> Experiments</button>
+        <button class="nav-item" data-view="verification"><span>✓</span> Verification</button>
+        <button class="nav-item" data-view="writing"><span>▧</span> Writing</button>
+        <button class="nav-item" data-view="versions"><span>◫</span> Versions & progress</button>
+      </nav>
+      <div class="sidebar-section"><div class="section-label">Recent chats <button class="tiny-button" id="refreshChats" title="Refresh chats">↻</button></div><div id="chatList" class="chat-list"></div></div>
+      <div class="sidebar-bottom"><div class="local-indicator"><i></i><div><strong>Local workspace</strong><small>Saved on this computer</small></div></div><div class="provider-note">Agent workflows run locally without credentials<br><span>Optional provider routing stays opt-in</span></div></div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar"><div class="topbar-title"><span class="mobile-brand">ResearchOS</span><span id="viewTitle">New chat</span><span class="release-chip">v1.0 · Complete</span></div><div class="top-actions"><button class="top-button" id="newResearch">＋ <span>New research</span></button><button class="icon-button" id="showVersions" aria-label="Show versions" title="Versions and progress">◫</button><div class="avatar" title="Local workspace">R</div></div></header>
+
+      <main id="mainView" class="main-view">
+        <section id="chatView" class="chat-view">
+          <div id="messages" class="messages" aria-live="polite"></div>
+          <div id="welcome" class="welcome">
+            <div class="welcome-symbol">R</div>
+            <p class="eyebrow">EVIDENCE-FIRST RESEARCH</p>
+            <h1>What are you researching?</h1>
+            <p class="welcome-copy">Explore the literature, organize evidence, and keep every research step traceable.</p>
+            <div class="starter-grid">
+              <button class="starter" data-prompt="Create a research brief about "><strong>Start with a research topic</strong><span>Search OpenAlex and Crossref</span><b>↗</b></button>
+              <button class="starter" data-prompt="Show me the current ResearchOS build status"><strong>Review build progress</strong><span>See completed and planned versions</span><b>↗</b></button>
+              <button class="starter" data-prompt="How do I keep claims linked to source evidence?"><strong>Explore evidence workflows</strong><span>Claims, passages, and provenance</span><b>↗</b></button>
+            </div>
+            <div class="honesty-note"><span>ⓘ</span><span>When configured, chat sends your recent conversation to the selected AI provider. Otherwise it uses local workspace guidance. Verify research claims against sources; literature discovery and methodology tools keep proposals distinct from verified findings.</span></div>
+          </div>
+          <div class="composer-dock">
+            <div id="attachments" class="attachment-strip"></div>
+            <div class="composer">
+              <textarea id="messageInput" rows="1" maxlength="12000" placeholder="Ask about your research or describe a topic…" aria-label="Message ResearchOS"></textarea>
+              <div class="composer-toolbar"><div class="composer-left">
+                <label class="tool-button" title="Attach a PDF"><input id="fileInput" type="file" accept="application/pdf,.pdf" hidden>＋ <span>Attach</span></label>
+                <button class="tool-button" id="micButton" title="Use voice input">♩ <span>Voice</span></button>
+                <label class="select-wrap" title="Input style"><span>Input</span><select id="inputStyle"><option value="chat">Chat</option><option value="command">Command</option><option value="note">Research note</option></select></label>
+                <label class="select-wrap output-style" title="Output style"><span>Output</span><select id="outputStyle"><option value="balanced">Balanced</option><option value="concise">Concise</option><option value="detailed">Detailed</option><option value="academic">Academic</option></select></label>
+              </div><button class="send-button" id="sendButton" aria-label="Send message" title="Send">↑</button></div>
+            </div>
+            <p class="composer-footnote">ResearchOS can make mistakes. Verify important claims against source material.</p>
+          </div>
+        </section>
+        <section id="panelView" class="panel-view" hidden></section>
+      </main>
+    </section>
+  </div>
+  <dialog id="researchDialog" class="research-dialog"><form id="researchForm" method="dialog"><div class="dialog-head"><div><span class="eyebrow">NEW PROJECT</span><h2>Start a research run</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div><p id="dialogError" class="error-banner" hidden></p><label>Research topic<input name="topic" required maxlength="1000" placeholder="A specific research question or topic"></label><label>Research field<input name="field" required maxlength="200" placeholder="e.g. Computer Science"></label><label class="check-row"><input name="search" type="checkbox" checked> Search OpenAlex and Crossref</label><button class="dialog-submit" type="submit">Create research brief <span>→</span></button><p class="dialog-note">This creates a local JSON run record and Markdown brief. Search results are discovery leads, not verified evidence.</p></form></dialog>
+</body>
+</html>

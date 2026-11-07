@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "researchos"
+version = "1.0.0"
+description = "An evidence-first foundation for AI-assisted scientific research"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["pypdf>=5.0,<7"]
+
+[project.optional-dependencies]
+ocr = ["pypdfium2>=4.30,<6", "Pillow>=10"]
+
+[project.scripts]
+researchos = "researchos.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+researchos = ["static/*.html", "static/*.css", "static/*.js", "writing/templates/*.tpl"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
