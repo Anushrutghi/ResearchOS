@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Authenticated local project records with role checks and attributed revisions."""
 
 from datetime import datetime, timezone
