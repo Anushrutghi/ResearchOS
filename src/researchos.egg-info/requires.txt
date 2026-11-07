@@ -1,0 +1,5 @@
+pypdf<7,>=5.0
+
+[ocr]
+pypdfium2<6,>=4.30
+Pillow>=10

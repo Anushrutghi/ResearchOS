@@ -1,0 +1,2 @@
+[console_scripts]
+researchos = researchos.main:main
